@@ -14,6 +14,6 @@ import java.util.List;
 public class EmployersList {
 
     @SerializedName("response")
-    private List<Employer> items = null;
+    public List<Employer> items = null;
 
 }

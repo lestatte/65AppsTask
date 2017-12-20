@@ -11,6 +11,6 @@ import ru.sample.elestatte.test65apps.response.EmployersList;
  *         Date: 19.12.17
  */
 interface ApiService {
-    @GET("http://gitlab.65apps.com/65gb/static/blob/master/testTask.json")
+    @GET("testTask.json")
     Observable<EmployersList> fetchEmployers();
 }
