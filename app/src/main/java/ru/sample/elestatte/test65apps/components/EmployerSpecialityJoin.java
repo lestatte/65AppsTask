@@ -2,6 +2,7 @@ package ru.sample.elestatte.test65apps.components;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
 
 import ru.sample.elestatte.test65apps.response.Employer;
 import ru.sample.elestatte.test65apps.response.Speciality;
@@ -15,6 +16,7 @@ import ru.sample.elestatte.test65apps.response.Speciality;
 @SuppressWarnings({"unused", "WeakerAccess"})
 @Entity(tableName = "employer_speciality_join",
         primaryKeys = { "idEmployer", "idSpeciality" },
+        indices = { @Index(value = "idSpeciality", unique = true) },
         foreignKeys = {
                 @ForeignKey(entity = Employer.class,
                         parentColumns = "id",
