@@ -6,6 +6,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -16,9 +17,9 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 @Entity
-public class Employer {
+public class Employer implements Serializable {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     public Integer id;
 
     @SerializedName("f_name")

@@ -3,6 +3,8 @@ package ru.sample.elestatte.test65apps.viewmodel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
@@ -11,9 +13,9 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
 import ru.sample.elestatte.test65apps.components.ApiClient;
-import ru.sample.elestatte.test65apps.components.EmployerDao;
 import ru.sample.elestatte.test65apps.components.EmployerDatabase;
 import ru.sample.elestatte.test65apps.response.EmployersList;
+import ru.sample.elestatte.test65apps.utility.Utils;
 
 /**
  * Main app view model
@@ -43,18 +45,25 @@ public class MainViewModel extends AndroidViewModel {
                 .subscribe(
                         new Consumer<EmployersList>() {
                             @Override
-                            public void accept(@NonNull EmployersList r)
-                                    throws Exception {
-                                EmployerDao employerDao =
-                                        EmployerDatabase.getInstance(context).getEmployerDao();
-                                employerDao.insertAll(r.items);
+                            public void accept(@NonNull EmployersList r) throws Exception {
+                                String key = "catalog_checksum";
+                                String newCheckSum = Utils.getChecksum(r);
+                                SharedPreferences sharedPref =
+                                        PreferenceManager.getDefaultSharedPreferences(context);
+                                String checkSum = sharedPref.getString(key, "");
+
+                                if (!checkSum.equals(newCheckSum)) {
+                                    SharedPreferences.Editor editor = sharedPref.edit();
+                                    editor.putString(key, newCheckSum);
+                                    editor.apply();
+                                    EmployerDatabase.getInstance(context).putData(r.items);
+                                }
                                 mCurrentState.onNext(ViewModelState.READY);
                             }
                         },
                         new Consumer<Throwable>() {
                             @Override
-                            public void accept(@NonNull Throwable throwable)
-                                    throws Exception {
+                            public void accept(@NonNull Throwable throwable) throws Exception {
                                 mCurrentState.onNext(ViewModelState.ERROR);
                             }
                         });

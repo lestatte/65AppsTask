@@ -21,8 +21,7 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getStateForSubscription().subscribe(
                 new Consumer<ViewModelState>() {
                     @Override
-                    public void accept(@NonNull ViewModelState r)
-                            throws Exception {
+                    public void accept(@NonNull ViewModelState r) throws Exception {
                         Log.d("111", r.name());
                     }
                 }

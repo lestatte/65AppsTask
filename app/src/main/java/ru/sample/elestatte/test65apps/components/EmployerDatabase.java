@@ -5,6 +5,8 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
+import java.util.List;
+
 import ru.sample.elestatte.test65apps.response.Employer;
 
 /**
@@ -27,6 +29,17 @@ public abstract class EmployerDatabase extends RoomDatabase {
                     EmployerDatabase.class, "employers-database").build();
         }
         return INSTANCE;
+    }
+
+    public void putData(List<Employer> items) {
+        EmployerDao dao = getEmployerDao();
+        dao.deleteAll();
+        Integer index = 0;
+        for (Employer employer : items) {
+            employer.id = index;
+            index++;
+        }
+        dao.insertAll(items);
     }
 
     public static void destroy() {
