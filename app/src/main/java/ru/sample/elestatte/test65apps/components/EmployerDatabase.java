@@ -6,6 +6,7 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.util.SparseArray;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ru.sample.elestatte.test65apps.response.Employer;
@@ -19,13 +20,15 @@ import ru.sample.elestatte.test65apps.utility.Utils;
  *         Date: 19.12.17
  */
 @SuppressWarnings("unused")
-@Database(entities = { Employer.class, Speciality.class }, version = 1)
+@Database(entities = { Employer.class, Speciality.class, EmployerSpecialityJoin.class },
+          version = 1)
 public abstract class EmployerDatabase extends RoomDatabase {
 
     private static EmployerDatabase INSTANCE = null;
 
     public abstract EmployerDao getEmployerDao();
     public abstract SpecialityDao getSpecialityDao();
+    public abstract EmployerSpecialityDao getEmployerSpecialityDao();
 
     public static EmployerDatabase getInstance(Context context) {
         if (INSTANCE == null) {
@@ -36,10 +39,16 @@ public abstract class EmployerDatabase extends RoomDatabase {
     }
 
     public void putData(List<Employer> items) {
+
         EmployerDao employerDao = getEmployerDao();
-        employerDao.deleteAll();
         SpecialityDao specialityDao = getSpecialityDao();
+        EmployerSpecialityDao employerSpecialityDao = getEmployerSpecialityDao();
+
+        employerDao.deleteAll();
         specialityDao.deleteAll();
+        employerSpecialityDao.deleteAll();
+
+        List<EmployerSpecialityJoin> employerSpecialityJoins = new ArrayList<>();
         SparseArray<Speciality> specialities = new SparseArray<>();
 
         Integer index = 0;
@@ -48,12 +57,16 @@ public abstract class EmployerDatabase extends RoomDatabase {
             index++;
             if (employer.speciality != null) {
                 for (Speciality speciality : employer.speciality) {
+                    employerSpecialityJoins.add(
+                            new EmployerSpecialityJoin(employer.id, speciality.id));
                     specialities.put(speciality.id, speciality);
                 }
             }
         }
-        specialityDao.insertAll(Utils.convertSparseToList(specialities));
+
         employerDao.insertAll(items);
+        specialityDao.insertAll(Utils.convertSparseToList(specialities));
+        employerSpecialityDao.insertAll(employerSpecialityJoins);
     }
 
     public static void destroy() {

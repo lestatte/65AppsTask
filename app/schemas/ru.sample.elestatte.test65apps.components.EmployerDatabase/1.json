@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "072682e8b2755d9fd52447a18e0aa01e",
+    "identityHash": "a0162e7f03f14e6a3385c957e7db0fab",
     "entities": [
       {
         "tableName": "Employer",
@@ -73,11 +73,61 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "employer_speciality_join",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idEmployer` INTEGER NOT NULL, `idSpeciality` INTEGER NOT NULL, PRIMARY KEY(`idEmployer`, `idSpeciality`), FOREIGN KEY(`idEmployer`) REFERENCES `Employer`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`idSpeciality`) REFERENCES `Speciality`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "idEmployer",
+            "columnName": "idEmployer",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idSpeciality",
+            "columnName": "idSpeciality",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idEmployer",
+            "idSpeciality"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "Employer",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idEmployer"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "Speciality",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idSpeciality"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"072682e8b2755d9fd52447a18e0aa01e\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"a0162e7f03f14e6a3385c957e7db0fab\")"
     ]
   }
 }
