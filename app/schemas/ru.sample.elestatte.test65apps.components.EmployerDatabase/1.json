@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "6e15bbb70cd98bd6fdba2b99358567fa",
+    "identityHash": "fe5296828ad1d25c1e6ac88f7a626f4f",
     "entities": [
       {
         "tableName": "Employer",
@@ -101,11 +101,11 @@
         "indices": [
           {
             "name": "index_employer_speciality_join_idSpeciality",
-            "unique": true,
+            "unique": false,
             "columnNames": [
               "idSpeciality"
             ],
-            "createSql": "CREATE UNIQUE INDEX `index_employer_speciality_join_idSpeciality` ON `${TABLE_NAME}` (`idSpeciality`)"
+            "createSql": "CREATE  INDEX `index_employer_speciality_join_idSpeciality` ON `${TABLE_NAME}` (`idSpeciality`)"
           }
         ],
         "foreignKeys": [
@@ -136,7 +136,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"6e15bbb70cd98bd6fdba2b99358567fa\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"fe5296828ad1d25c1e6ac88f7a626f4f\")"
     ]
   }
 }

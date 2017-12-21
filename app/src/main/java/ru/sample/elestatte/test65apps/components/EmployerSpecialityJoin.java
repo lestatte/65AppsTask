@@ -16,7 +16,7 @@ import ru.sample.elestatte.test65apps.response.Speciality;
 @SuppressWarnings({"unused", "WeakerAccess"})
 @Entity(tableName = "employer_speciality_join",
         primaryKeys = { "idEmployer", "idSpeciality" },
-        indices = { @Index(value = "idSpeciality", unique = true) },
+        indices = { @Index(value = "idSpeciality") },
         foreignKeys = {
                 @ForeignKey(entity = Employer.class,
                         parentColumns = "id",
