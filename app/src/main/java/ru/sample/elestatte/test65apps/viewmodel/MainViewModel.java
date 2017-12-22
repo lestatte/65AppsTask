@@ -3,8 +3,6 @@ package ru.sample.elestatte.test65apps.viewmodel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
@@ -15,6 +13,7 @@ import io.reactivex.subjects.BehaviorSubject;
 import ru.sample.elestatte.test65apps.components.ApiClient;
 import ru.sample.elestatte.test65apps.components.EmployerDatabase;
 import ru.sample.elestatte.test65apps.response.EmployersList;
+import ru.sample.elestatte.test65apps.utility.PrefManager;
 import ru.sample.elestatte.test65apps.utility.Utils;
 
 /**
@@ -46,16 +45,9 @@ public class MainViewModel extends AndroidViewModel {
                         new Consumer<EmployersList>() {
                             @Override
                             public void accept(@NonNull EmployersList r) throws Exception {
-                                String key = "catalog_checksum";
                                 String newCheckSum = Utils.getChecksum(r);
-                                SharedPreferences sharedPref =
-                                        PreferenceManager.getDefaultSharedPreferences(context);
-                                String checkSum = sharedPref.getString(key, "");
-
-                                if (!checkSum.equals(newCheckSum)) {
-                                    SharedPreferences.Editor editor = sharedPref.edit();
-                                    editor.putString(key, newCheckSum);
-                                    editor.apply();
+                                if (!PrefManager.readChecksum(context).equals(newCheckSum)) {
+                                    PrefManager.writeChecksum(context, newCheckSum);
                                     EmployerDatabase.getInstance(context).putData(r.items);
                                 }
                                 mCurrentState.onNext(ViewModelState.READY);
