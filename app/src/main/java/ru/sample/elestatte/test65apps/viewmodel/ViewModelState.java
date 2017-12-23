@@ -9,5 +9,6 @@ package ru.sample.elestatte.test65apps.viewmodel;
 public enum ViewModelState {
     READY,
     LOADING,
-    ERROR
+    ERROR,
+    EMPTY
 }

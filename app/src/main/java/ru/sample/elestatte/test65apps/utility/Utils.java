@@ -1,5 +1,6 @@
 package ru.sample.elestatte.test65apps.utility;
 
+import android.app.Activity;
 import android.util.SparseArray;
 
 import java.io.ByteArrayOutputStream;
@@ -11,6 +12,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.sample.elestatte.test65apps.activity.MainActivityDelegate;
+
 /**
  * Utility class with useful functions for convenience
  *
@@ -18,7 +21,7 @@ import java.util.List;
  *         Date: 21.12.17
  */
 @SuppressWarnings("unused")
-public class Utils {
+public final class Utils {
 
     public static String getChecksum(Serializable object)
             throws IOException, NoSuchAlgorithmException {
@@ -34,7 +37,7 @@ public class Utils {
     }
 
     public static <T> List<T> convertSparseToList(SparseArray<T> sparseArray) {
-        if (sparseArray == null) {
+        if (null == sparseArray) {
             return null;
         }
         List<T> arrayList = new ArrayList<>(sparseArray.size());
@@ -46,4 +49,10 @@ public class Utils {
         return arrayList;
     }
 
+    public static void replaceFragmentById(Activity activity, int id) {
+        MainActivityDelegate delegate = (MainActivityDelegate) activity;
+        if (null != delegate) {
+            delegate.replaceFragmentById(id);
+        }
+    }
 }

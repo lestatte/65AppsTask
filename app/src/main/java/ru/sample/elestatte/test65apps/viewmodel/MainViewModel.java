@@ -34,7 +34,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     private void loadData() {
-        if (mDataDisposable != null) {
+        if (null != mDataDisposable) {
             mDataDisposable.dispose();
         }
         final Context context = getApplication().getApplicationContext();
@@ -50,7 +50,11 @@ public class MainViewModel extends AndroidViewModel {
                                     PrefManager.writeChecksum(context, newCheckSum);
                                     EmployerDatabase.getInstance(context).putData(r.items);
                                 }
-                                mCurrentState.onNext(ViewModelState.READY);
+                                if (r.items.isEmpty()) {
+                                    mCurrentState.onNext(ViewModelState.EMPTY);
+                                } else {
+                                    mCurrentState.onNext(ViewModelState.READY);
+                                }
                             }
                         },
                         new Consumer<Throwable>() {
@@ -67,7 +71,7 @@ public class MainViewModel extends AndroidViewModel {
 
     @Override
     protected void onCleared() {
-        if (mDataDisposable != null) {
+        if (null != mDataDisposable) {
             mDataDisposable.dispose();
         }
         super.onCleared();

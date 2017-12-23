@@ -31,7 +31,7 @@ public abstract class EmployerDatabase extends RoomDatabase {
     public abstract EmployerSpecialityDao getEmployerSpecialityDao();
 
     public static EmployerDatabase getInstance(Context context) {
-        if (INSTANCE == null) {
+        if (null == INSTANCE) {
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                     EmployerDatabase.class, "employers-database").build();
         }
@@ -55,7 +55,7 @@ public abstract class EmployerDatabase extends RoomDatabase {
         for (Employer employer : items) {
             employer.id = index;
             index++;
-            if (employer.speciality != null) {
+            if (null != employer.speciality) {
                 for (Speciality speciality : employer.speciality) {
                     employerSpecialityJoins.add(
                             new EmployerSpecialityJoin(employer.id, speciality.id));
