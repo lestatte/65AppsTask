@@ -7,7 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ViewAnimator;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import ru.sample.elestatte.test65apps.R;
 import ru.sample.elestatte.test65apps.activity.MainActivityDelegate;
@@ -23,11 +28,20 @@ import ru.sample.elestatte.test65apps.viewmodel.ViewModelState;
  */
 public class MainActivityFragment extends Fragment {
 
+    @BindView(R.id.view_animator)
+    ViewAnimator mViewAnimator;
+
+    @BindView(R.id.repeat_button)
+    Button mRepeatButton;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-        ViewModelProviders.of(this).get(MainViewModel.class)
-                .getStateForSubscription().subscribe(
+        View view =
+                inflater.inflate(R.layout.ftragment_main_activity, container, false);
+        ButterKnife.bind(this, view);
+        final MainViewModel viewModel =
+                ViewModelProviders.of(this).get(MainViewModel.class);
+        viewModel.getStateForSubscription().observeOn(AndroidSchedulers.mainThread()).subscribe(
                 new Consumer<ViewModelState>() {
                     @Override
                     public void accept(@io.reactivex.annotations.NonNull ViewModelState r)
@@ -39,18 +53,21 @@ public class MainActivityFragment extends Fragment {
                                 break;
 
                             case LOADING:
-                                break;
-
                             case EMPTY:
-                                break;
-
                             case ERROR:
+                                mViewAnimator.setDisplayedChild(r.ordinal());
                                 break;
                         }
                     }
                 }
         );
-        return inflater.inflate(R.layout.ftragment_main_activity, container, false);
+        mRepeatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.repeatLoadData();
+            }
+        });
+        return view;
     }
 
 }

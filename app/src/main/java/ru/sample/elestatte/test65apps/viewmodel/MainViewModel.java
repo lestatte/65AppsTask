@@ -33,6 +33,11 @@ public class MainViewModel extends AndroidViewModel {
         loadData();
     }
 
+    public void repeatLoadData() {
+        mCurrentState.onNext(ViewModelState.LOADING);
+        loadData();
+    }
+
     private void loadData() {
         if (null != mDataDisposable) {
             mDataDisposable.dispose();

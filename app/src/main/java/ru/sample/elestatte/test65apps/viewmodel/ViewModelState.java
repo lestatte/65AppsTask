@@ -7,8 +7,8 @@ package ru.sample.elestatte.test65apps.viewmodel;
  *         Date: 20.12.17
  */
 public enum ViewModelState {
-    READY,
     LOADING,
     ERROR,
-    EMPTY
+    EMPTY,
+    READY
 }
