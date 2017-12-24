@@ -12,7 +12,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.sample.elestatte.test65apps.R;
 import ru.sample.elestatte.test65apps.response.Employer;
+import ru.sample.elestatte.test65apps.utility.Utils;
 
 /**
  * Employer Adapter for display Employer in list
@@ -25,13 +27,16 @@ public class EmployerAdapter extends ArrayAdapter<Employer> {
         @BindView(android.R.id.text1)
         TextView name;
 
+        @BindView(android.R.id.text2)
+        TextView age;
+
         ViewHolder(View view){
             ButterKnife.bind(this, view);
         }
     }
 
     public EmployerAdapter(Context context, List<Employer> items) {
-        super(context, android.R.layout.simple_list_item_1, items);
+        super(context, android.R.layout.simple_list_item_2, items);
     }
 
     @NonNull
@@ -40,7 +45,7 @@ public class EmployerAdapter extends ArrayAdapter<Employer> {
         ViewHolder holder;
         if (null == view) {
             view = LayoutInflater.from(getContext())
-                    .inflate(android.R.layout.simple_list_item_1, null);
+                    .inflate(android.R.layout.simple_list_item_2, null);
             holder = new ViewHolder(view);
             view.setTag(holder);
         } else {
@@ -49,7 +54,10 @@ public class EmployerAdapter extends ArrayAdapter<Employer> {
 
         Employer item = getItem(position);
         if (null != item) {
-            holder.name.setText(item.lName);
+            String name = Utils.capitalize(item.fName) + " " + Utils.capitalize(item.lName);
+            holder.name.setText(name.trim());
+            holder.age.setText(getContext().getString(
+                    R.string.age, Utils.getAgeFromStrDate(item.birthday)));
         }
         return view;
     }

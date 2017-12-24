@@ -6,4 +6,5 @@
     <string name="title_speciality">Выберите специальность:</string>
     <string name="title_employer">Список специалистов:</string>
     <string name="all_speciality">Все специальности</string>
+    <string name="age">Возраст: %s</string>
 </resources>
