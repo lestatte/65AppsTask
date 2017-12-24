@@ -14,6 +14,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
+import io.reactivex.subjects.PublishSubject;
 import ru.sample.elestatte.test65apps.R;
 import ru.sample.elestatte.test65apps.components.EmployerDatabase;
 import ru.sample.elestatte.test65apps.response.Employer;
@@ -30,7 +31,7 @@ public class FilteredEmployerListViewModel extends AndroidViewModel {
     private Disposable mSpecialityDataDisposable = null;
     private Disposable mEmployerDataDisposable = null;
     private BehaviorSubject<List<Speciality>> mSpecialityData = BehaviorSubject.create();
-    private BehaviorSubject<List<Employer>> mEmployersData = BehaviorSubject.create();
+    private PublishSubject<List<Employer>> mEmployersData = PublishSubject.create();
 
     public FilteredEmployerListViewModel(
             @android.support.annotation.NonNull Application application) {

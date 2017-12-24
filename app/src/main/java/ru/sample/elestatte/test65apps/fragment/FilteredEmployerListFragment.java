@@ -1,6 +1,7 @@
 package ru.sample.elestatte.test65apps.fragment;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -77,7 +78,10 @@ public class FilteredEmployerListFragment extends Fragment {
                         @Override
                         public void accept(@io.reactivex.annotations.NonNull List<Employer> r)
                                 throws Exception {
-                            mEmployerList.setAdapter(new EmployerAdapter(getContext(), r));
+                            Context context = getContext();
+                            if (null != context) {
+                                mEmployerList.setAdapter(new EmployerAdapter(context, r));
+                            }
                         }
                     }
         );
