@@ -37,7 +37,7 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view =
-                inflater.inflate(R.layout.ftragment_main_activity, container, false);
+                inflater.inflate(R.layout.fragment_main_activity, container, false);
         ButterKnife.bind(this, view);
         final MainViewModel viewModel =
                 ViewModelProviders.of(this).get(MainViewModel.class);

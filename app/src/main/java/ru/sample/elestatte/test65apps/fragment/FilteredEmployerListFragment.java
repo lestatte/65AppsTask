@@ -23,6 +23,7 @@ import ru.sample.elestatte.test65apps.adapter.EmployerAdapter;
 import ru.sample.elestatte.test65apps.adapter.SpecialityAdapter;
 import ru.sample.elestatte.test65apps.response.Employer;
 import ru.sample.elestatte.test65apps.response.Speciality;
+import ru.sample.elestatte.test65apps.utility.Utils;
 import ru.sample.elestatte.test65apps.viewmodel.FilteredEmployerListViewModel;
 
 /**
@@ -81,6 +82,19 @@ public class FilteredEmployerListFragment extends Fragment {
                             Context context = getContext();
                             if (null != context) {
                                 mEmployerList.setAdapter(new EmployerAdapter(context, r));
+                                mEmployerList.setOnItemClickListener(
+                                        new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(
+                                            AdapterView<?> adapterView, View view, int i, long l) {
+                                        Employer item =
+                                                (Employer) adapterView.getItemAtPosition(i);
+                                        if (null != item) {
+                                            Utils.addFragment(getActivity(),
+                                                    DetailEmployerFragment.create(item));
+                                        }
+                                    }
+                                });
                             }
                         }
                     }

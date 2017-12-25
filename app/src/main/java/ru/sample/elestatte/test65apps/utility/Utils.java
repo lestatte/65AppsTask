@@ -1,6 +1,7 @@
 package ru.sample.elestatte.test65apps.utility;
 
 import android.app.Activity;
+import android.support.v4.app.Fragment;
 import android.util.SparseArray;
 
 import java.io.ByteArrayOutputStream;
@@ -26,7 +27,6 @@ import ru.sample.elestatte.test65apps.activity.MainActivityDelegate;
  * @author Shramko Alexey
  *         Date: 21.12.17
  */
-@SuppressWarnings("unused")
 public final class Utils {
 
     public static String getChecksum(Serializable object)
@@ -59,6 +59,13 @@ public final class Utils {
         MainActivityDelegate delegate = (MainActivityDelegate) activity;
         if (null != delegate) {
             delegate.replaceFragmentById(id);
+        }
+    }
+
+    public static void addFragment(Activity activity, Fragment fragment) {
+        MainActivityDelegate delegate = (MainActivityDelegate) activity;
+        if (null != delegate) {
+            delegate.addFragment(fragment);
         }
     }
 
