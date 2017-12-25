@@ -3,4 +3,5 @@
     <dimen name="margin">5dp</dimen>
     <dimen name="extra_margin">10dp</dimen>
     <dimen name="def_height">40dp</dimen>
+    <dimen name="avatar_height">200dp</dimen>
 </resources>

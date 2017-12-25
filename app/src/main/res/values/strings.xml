@@ -7,4 +7,9 @@
     <string name="title_employer">Список специалистов:</string>
     <string name="all_speciality">Все специальности</string>
     <string name="age">Возраст: %s</string>
+    <string name="title_family">Фамилия: %s</string>
+    <string name="title_name">Имя: %s</string>
+    <string name="title_birthday">Дата рождения: %s</string>
+    <string name="title_specialities">Специальности: %s</string>
+    <string name="year_ending">%s г.</string>
 </resources>

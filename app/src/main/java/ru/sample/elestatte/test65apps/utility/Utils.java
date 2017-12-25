@@ -96,6 +96,18 @@ public final class Utils {
         return "";
     }
 
+    public static String reformatDate(String str) {
+        if (null != str && !str.isEmpty()) {
+            Date birthday = getDateFromString(str);
+            if (null != birthday) {
+                DateFormat formatter =
+                        new SimpleDateFormat("dd.mm.yyyy", Locale.getDefault());
+                return formatter.format(birthday);
+            }
+        }
+        return "";
+    }
+
     private static Date getDateFromString(String str) {
         if (null != str && !str.isEmpty()) {
             DateFormat format1 = new SimpleDateFormat("yyyy-mm-dd", Locale.getDefault());
