@@ -19,7 +19,7 @@ import ru.sample.elestatte.test65apps.response.Speciality;
  * Speciality Adapter for display Speciality in spinner
  *
  * @author Shramko Alexey
- *         Date: 20.12.17
+ *         Date: 23.12.17
  */
 public class SpecialityAdapter extends ArrayAdapter<Speciality> implements SpinnerAdapter {
 

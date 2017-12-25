@@ -24,7 +24,7 @@ import ru.sample.elestatte.test65apps.utility.Utils;
  * Fragment for displaying detail info of employer (appears after click on item in list).
  *
  * @author Shramko Alexey
- *         Date: 19.12.17
+ *         Date: 23.12.17
  */
 public class DetailEmployerFragment extends Fragment {
 

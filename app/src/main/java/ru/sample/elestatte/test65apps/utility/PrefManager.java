@@ -8,7 +8,7 @@ import android.preference.PreferenceManager;
  * Utility class for work with preferences
  *
  * @author Shramko Alexey
- *         Date: 21.12.17
+ *         Date: 23.12.17
  */
 public final class PrefManager {
 

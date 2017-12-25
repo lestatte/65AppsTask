@@ -20,7 +20,7 @@ import ru.sample.elestatte.test65apps.utility.Utils;
  * Employer Adapter for display Employer in list
  *
  * @author Shramko Alexey
- *         Date: 20.12.17
+ *         Date: 23.12.17
  */
 public class EmployerAdapter extends ArrayAdapter<Employer> {
     static class ViewHolder {

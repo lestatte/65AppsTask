@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
  * Interface which is describing methods for fragment's replacing in main activity.
  *
  * @author Shramko Alexey
- *         Date: 19.12.17
+ *         Date: 23.12.17
  */
 public interface MainActivityDelegate {
 

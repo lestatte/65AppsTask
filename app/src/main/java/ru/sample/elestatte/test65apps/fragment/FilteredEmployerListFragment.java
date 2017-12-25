@@ -30,7 +30,7 @@ import ru.sample.elestatte.test65apps.viewmodel.FilteredEmployerListViewModel;
  * Fragment for displaying list of employers (appears after startup fragment).
  *
  * @author Shramko Alexey
- *         Date: 19.12.17
+ *         Date: 23.12.17
  */
 public class FilteredEmployerListFragment extends Fragment {
 

@@ -13,7 +13,7 @@ import ru.sample.elestatte.test65apps.response.EmployersList;
  * API implementation
  *
  * @author Shramko Alexey
- *         Date: 19.12.17
+ *         Date: 23.12.17
  */
 public class ApiClient {
 

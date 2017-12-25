@@ -13,7 +13,7 @@ import java.util.List;
  * Employer item in response
  *
  * @author Shramko Alexey
- *         Date: 19.12.17
+ *         Date: 23.12.17
  */
 @Entity
 public class Employer implements Serializable {

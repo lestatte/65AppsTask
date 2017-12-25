@@ -9,7 +9,7 @@ import java.util.List;
  * List of employers in response
  *
  * @author Shramko Alexey
- *         Date: 19.12.17
+ *         Date: 23.12.17
  */
 public class EmployersList implements Serializable {
 

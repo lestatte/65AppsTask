@@ -17,7 +17,7 @@ import ru.sample.elestatte.test65apps.utility.Utils;
  * Google Room database implementation
  *
  * @author Shramko Alexey
- *         Date: 19.12.17
+ *         Date: 23.12.17
  */
 @Database(entities = { Employer.class, Speciality.class, EmployerSpecialityJoin.class },
           version = 1)

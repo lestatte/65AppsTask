@@ -11,7 +11,7 @@ import ru.sample.elestatte.test65apps.response.Speciality;
  * Employer - Specialty item for mapping
  *
  * @author Shramko Alexey
- *         Date: 19.12.17
+ *         Date: 23.12.17
  */
 @Entity(tableName = "employer_speciality_join",
         primaryKeys = { "idEmployer", "idSpeciality" },

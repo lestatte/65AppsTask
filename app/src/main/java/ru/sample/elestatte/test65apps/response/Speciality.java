@@ -11,7 +11,7 @@ import java.io.Serializable;
  * Specialty item in response
  *
  * @author Shramko Alexey
- *         Date: 19.12.17
+ *         Date: 23.12.17
  */
 @Entity
 public class Speciality implements Serializable {

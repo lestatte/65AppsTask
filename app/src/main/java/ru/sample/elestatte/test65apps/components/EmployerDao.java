@@ -12,7 +12,7 @@ import ru.sample.elestatte.test65apps.response.Employer;
  * Dao for storing response from ApiClient - Employer item
  *
  * @author Shramko Alexey
- *         Date: 19.12.17
+ *         Date: 23.12.17
  */
 @Dao
 public interface EmployerDao {

@@ -24,7 +24,7 @@ import ru.sample.elestatte.test65apps.response.Speciality;
  * View model for fragment where we display list of employers with filter
  *
  * @author Shramko Alexey
- *         Date: 20.12.17
+ *         Date: 23.12.17
  */
 public class FilteredEmployerListViewModel extends AndroidViewModel {
 

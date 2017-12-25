@@ -16,7 +16,7 @@ import ru.sample.elestatte.test65apps.fragment.MainActivityFragment;
  * Here we replace fragments and init loading from server
  *
  * @author Shramko Alexey
- *         Date: 19.12.17
+ *         Date: 23.12.17
  */
 public class MainActivity extends AppCompatActivity implements MainActivityDelegate {
 

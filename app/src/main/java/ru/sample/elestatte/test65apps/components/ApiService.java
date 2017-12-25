@@ -8,7 +8,7 @@ import ru.sample.elestatte.test65apps.response.EmployersList;
  * Here is described all API interfaces for data loading from server
  *
  * @author Shramko Alexey
- *         Date: 19.12.17
+ *         Date: 23.12.17
  */
 interface ApiService {
     @GET("testTask.json")

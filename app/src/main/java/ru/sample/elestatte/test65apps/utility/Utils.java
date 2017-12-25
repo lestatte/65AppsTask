@@ -25,7 +25,7 @@ import ru.sample.elestatte.test65apps.activity.MainActivityDelegate;
  * Utility class with useful functions for convenience
  *
  * @author Shramko Alexey
- *         Date: 21.12.17
+ *         Date: 23.12.17
  */
 public final class Utils {
 
