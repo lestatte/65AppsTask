@@ -14,7 +14,6 @@ import ru.sample.elestatte.test65apps.response.Employer;
  * @author Shramko Alexey
  *         Date: 19.12.17
  */
-@SuppressWarnings("unused")
 @Dao
 public interface EmployerDao {
 

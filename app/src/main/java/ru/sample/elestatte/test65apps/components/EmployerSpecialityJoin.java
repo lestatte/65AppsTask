@@ -13,7 +13,6 @@ import ru.sample.elestatte.test65apps.response.Speciality;
  * @author Shramko Alexey
  *         Date: 19.12.17
  */
-@SuppressWarnings({"unused", "WeakerAccess"})
 @Entity(tableName = "employer_speciality_join",
         primaryKeys = { "idEmployer", "idSpeciality" },
         indices = { @Index(value = "idSpeciality") },
@@ -30,7 +29,7 @@ public class EmployerSpecialityJoin {
     public final int idEmployer;
     public final int idSpeciality;
 
-    public EmployerSpecialityJoin(final int idEmployer, final int idSpeciality) {
+    EmployerSpecialityJoin(final int idEmployer, final int idSpeciality) {
         this.idEmployer = idEmployer;
         this.idSpeciality = idSpeciality;
     }

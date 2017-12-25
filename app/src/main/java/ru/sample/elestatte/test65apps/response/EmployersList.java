@@ -11,7 +11,6 @@ import java.util.List;
  * @author Shramko Alexey
  *         Date: 19.12.17
  */
-@SuppressWarnings("unused")
 public class EmployersList implements Serializable {
 
     @SerializedName("response")

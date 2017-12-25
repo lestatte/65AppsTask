@@ -19,7 +19,6 @@ import ru.sample.elestatte.test65apps.utility.Utils;
  * @author Shramko Alexey
  *         Date: 19.12.17
  */
-@SuppressWarnings("unused")
 @Database(entities = { Employer.class, Speciality.class, EmployerSpecialityJoin.class },
           version = 1)
 public abstract class EmployerDatabase extends RoomDatabase {
@@ -67,9 +66,5 @@ public abstract class EmployerDatabase extends RoomDatabase {
         employerDao.insertAll(items);
         specialityDao.insertAll(Utils.convertSparseToList(specialities));
         employerSpecialityDao.insertAll(employerSpecialityJoins);
-    }
-
-    public static void destroy() {
-        INSTANCE = null;
     }
 }

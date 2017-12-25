@@ -14,7 +14,6 @@ import ru.sample.elestatte.test65apps.response.Speciality;
  * @author Shramko Alexey
  *         Date: 19.12.17
  */
-@SuppressWarnings("unused")
 @Dao
 public interface SpecialityDao {
 

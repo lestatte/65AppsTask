@@ -30,8 +30,10 @@ public class FilteredEmployerListViewModel extends AndroidViewModel {
 
     private Disposable mSpecialityDataDisposable = null;
     private Disposable mEmployerDataDisposable = null;
+    private Disposable mFullEmployerDataDisposable = null;
     private BehaviorSubject<List<Speciality>> mSpecialityData = BehaviorSubject.create();
     private PublishSubject<List<Employer>> mEmployersData = PublishSubject.create();
+    private PublishSubject<Employer> mFullEmployerData = PublishSubject.create();
 
     public FilteredEmployerListViewModel(
             @android.support.annotation.NonNull Application application) {
@@ -67,6 +69,11 @@ public class FilteredEmployerListViewModel extends AndroidViewModel {
     public Observable<List<Speciality>> getSpecialityDataForSubscription() {
         return mSpecialityData;
     }
+
+    public Observable<Employer> getFullEmployerForSubscription() {
+        return mFullEmployerData;
+    }
+
     public Observable<List<Employer>> getEmployerDataForSubscription() {
         return mEmployersData;
     }
@@ -79,7 +86,7 @@ public class FilteredEmployerListViewModel extends AndroidViewModel {
         mEmployerDataDisposable =
                 Observable.fromCallable(new Callable<List<Employer>>() {
                     @Override public List<Employer> call() {
-                        if (id == -1) {
+                        if (-1 == id) {
                             return EmployerDatabase.getInstance(context).
                                     getEmployerDao().getAll();
                         } else {
@@ -98,6 +105,30 @@ public class FilteredEmployerListViewModel extends AndroidViewModel {
                           });
     }
 
+    public void loadSpecialitiesByEmployer(final Employer item) {
+        if (null != mFullEmployerDataDisposable) {
+            mFullEmployerDataDisposable.dispose();
+        }
+        final Context context = getApplication().getApplicationContext();
+        mFullEmployerDataDisposable =
+                Observable.fromCallable(new Callable<Employer>() {
+                    @Override public Employer call() {
+                        item.speciality = EmployerDatabase.getInstance(context)
+                                .getEmployerSpecialityDao().getSpecialityForEmployer(item.id);
+                        return item;
+                    }
+                }).observeOn(Schedulers.io())
+                  .subscribeOn(Schedulers.io())
+                  .subscribe(
+                          new Consumer<Employer>() {
+                              @Override
+                              public void accept(
+                                      @NonNull Employer r) throws Exception {
+                                  mFullEmployerData.onNext(r);
+                              }
+                          });
+    }
+
     @Override
     protected void onCleared() {
         if (null != mSpecialityDataDisposable) {
@@ -105,6 +136,9 @@ public class FilteredEmployerListViewModel extends AndroidViewModel {
         }
         if (null != mEmployerDataDisposable) {
             mEmployerDataDisposable.dispose();
+        }
+        if (null != mFullEmployerDataDisposable) {
+            mFullEmployerDataDisposable.dispose();
         }
         super.onCleared();
     }

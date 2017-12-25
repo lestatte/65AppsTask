@@ -90,12 +90,22 @@ public class FilteredEmployerListFragment extends Fragment {
                                         Employer item =
                                                 (Employer) adapterView.getItemAtPosition(i);
                                         if (null != item) {
-                                            Utils.addFragment(getActivity(),
-                                                    DetailEmployerFragment.create(item));
+                                            viewModel.loadSpecialitiesByEmployer(item);
                                         }
                                     }
                                 });
                             }
+                        }
+                    }
+        );
+        viewModel.getFullEmployerForSubscription()
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(
+                    new Consumer<Employer>() {
+                        @Override
+                        public void accept(@io.reactivex.annotations.NonNull Employer r)
+                                throws Exception {
+                            Utils.addFragment(getActivity(),
+                                    DetailEmployerFragment.create(r));
                         }
                     }
         );

@@ -7,6 +7,7 @@ import android.arch.persistence.room.Query;
 import java.util.List;
 
 import ru.sample.elestatte.test65apps.response.Employer;
+import ru.sample.elestatte.test65apps.response.Speciality;
 
 /**
  * Dao for storing response from ApiClient - Speciality Employer Relation
@@ -14,7 +15,6 @@ import ru.sample.elestatte.test65apps.response.Employer;
  * @author Shramko Alexey
  *         Date: 19.12.17
  */
-@SuppressWarnings("unused")
 @Dao
 public interface EmployerSpecialityDao {
 
@@ -22,6 +22,11 @@ public interface EmployerSpecialityDao {
            "ON employer.id = employer_speciality_join.idEmployer " +
            "WHERE employer_speciality_join.idSpeciality = :idSpeciality")
     List<Employer> getEmployerForSpeciality(final int idSpeciality);
+
+    @Query("SELECT speciality.* FROM speciality INNER JOIN employer_speciality_join " +
+            "ON speciality.id = employer_speciality_join.idSpeciality " +
+            "WHERE employer_speciality_join.idEmployer = :idEmployer")
+    List<Speciality> getSpecialityForEmployer(final int idEmployer);
 
     @Insert
     void insertAll(List<EmployerSpecialityJoin> employerSpecialityJoinList);

@@ -11,10 +11,13 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.sample.elestatte.test65apps.R;
 import ru.sample.elestatte.test65apps.response.Employer;
+import ru.sample.elestatte.test65apps.response.Speciality;
 import ru.sample.elestatte.test65apps.utility.Utils;
 
 /**
@@ -29,6 +32,7 @@ public class DetailEmployerFragment extends Fragment {
     private static String F_NAME = "f_name";
     private static String BIRTHDAY = "birthday";
     private static String AVATAR = "avatar";
+    private static String SPECIALITIES = "specialities";
 
     @BindView(R.id.avatar)
     ImageView mAvatar;
@@ -52,6 +56,17 @@ public class DetailEmployerFragment extends Fragment {
         args.putString(F_NAME, Utils.capitalize(item.fName).trim());
         args.putString(BIRTHDAY, Utils.reformatDate(item.birthday));
         args.putString(AVATAR, item.avatarUrl);
+        StringBuilder builder = new StringBuilder("");
+        List<Speciality> items = item.speciality;
+        if (!items.isEmpty()) {
+            for (Speciality speciality: items) {
+                if (0 != builder.length()) {
+                    builder.append(", ");
+                }
+                builder.append(speciality.name);
+            }
+        }
+        args.putString(SPECIALITIES, builder.toString());
         fragment.setArguments(args);
         return fragment;
     }
@@ -78,7 +93,8 @@ public class DetailEmployerFragment extends Fragment {
                 birthday = getString(R.string.year_ending, args.getString(BIRTHDAY));
             }
             mBirthday.setText(getString(R.string.title_birthday, birthday));
-            mSpecialities.setText(getString(R.string.title_specialities, ""));
+            mSpecialities.setText(
+                    getString(R.string.title_specialities, args.getString(SPECIALITIES)));
         }
         return view;
     }
