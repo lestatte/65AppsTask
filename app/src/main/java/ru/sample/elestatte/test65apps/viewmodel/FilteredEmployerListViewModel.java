@@ -16,7 +16,7 @@ import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.PublishSubject;
 import ru.sample.elestatte.test65apps.R;
-import ru.sample.elestatte.test65apps.components.EmployerDatabase;
+import ru.sample.elestatte.test65apps.components.database.EmployerDatabase;
 import ru.sample.elestatte.test65apps.response.Employer;
 import ru.sample.elestatte.test65apps.response.Speciality;
 

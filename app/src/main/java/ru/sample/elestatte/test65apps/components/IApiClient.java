@@ -1,16 +1,16 @@
 package ru.sample.elestatte.test65apps.components;
 
 import io.reactivex.Observable;
-import retrofit2.http.GET;
 import ru.sample.elestatte.test65apps.response.EmployersList;
 
 /**
- * Here is described all API interfaces for data loading from server
+ * Common interface for receiving data from API
  *
  * @author Shramko Alexey
- *         Date: 23.12.17
+ *         Date: 05.02.18
  */
-interface ApiService {
-    @GET("testTask.json")
+public interface IApiClient {
+
     Observable<EmployersList> fetchEmployers();
+
 }

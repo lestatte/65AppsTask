@@ -1,0 +1,142 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "fe5296828ad1d25c1e6ac88f7a626f4f",
+    "entities": [
+      {
+        "tableName": "Employer",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `fName` TEXT, `lName` TEXT, `birthday` TEXT, `avatarUrl` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fName",
+            "columnName": "fName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lName",
+            "columnName": "lName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "birthday",
+            "columnName": "birthday",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "avatarUrl",
+            "columnName": "avatarUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Speciality",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `name` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "employer_speciality_join",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idEmployer` INTEGER NOT NULL, `idSpeciality` INTEGER NOT NULL, PRIMARY KEY(`idEmployer`, `idSpeciality`), FOREIGN KEY(`idEmployer`) REFERENCES `Employer`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`idSpeciality`) REFERENCES `Speciality`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "idEmployer",
+            "columnName": "idEmployer",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idSpeciality",
+            "columnName": "idSpeciality",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idEmployer",
+            "idSpeciality"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_employer_speciality_join_idSpeciality",
+            "unique": false,
+            "columnNames": [
+              "idSpeciality"
+            ],
+            "createSql": "CREATE  INDEX `index_employer_speciality_join_idSpeciality` ON `${TABLE_NAME}` (`idSpeciality`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Employer",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idEmployer"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "Speciality",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idSpeciality"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"fe5296828ad1d25c1e6ac88f7a626f4f\")"
+    ]
+  }
+}

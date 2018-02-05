@@ -28,11 +28,11 @@ import ru.sample.elestatte.test65apps.utility.Utils;
  */
 public class DetailEmployerFragment extends Fragment {
 
-    private static String L_NAME = "l_name";
-    private static String F_NAME = "f_name";
-    private static String BIRTHDAY = "birthday";
-    private static String AVATAR = "avatar";
-    private static String SPECIALITIES = "specialities";
+    private static final String L_NAME = "l_name";
+    private static final String F_NAME = "f_name";
+    private static final String BIRTHDAY = "birthday";
+    private static final String AVATAR = "avatar";
+    private static final String SPECIALITIES = "specialities";
 
     @BindView(R.id.avatar)
     ImageView mAvatar;

@@ -4,14 +4,17 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.content.Context;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
-import ru.sample.elestatte.test65apps.components.ApiClient;
-import ru.sample.elestatte.test65apps.components.EmployerDatabase;
+import ru.sample.elestatte.test65apps.App65;
+import ru.sample.elestatte.test65apps.components.IApiClient;
+import ru.sample.elestatte.test65apps.components.database.EmployerDatabase;
 import ru.sample.elestatte.test65apps.response.EmployersList;
 import ru.sample.elestatte.test65apps.utility.PrefManager;
 import ru.sample.elestatte.test65apps.utility.Utils;
@@ -28,8 +31,12 @@ public class MainViewModel extends AndroidViewModel {
     private BehaviorSubject<ViewModelState> mCurrentState =
             BehaviorSubject.createDefault(ViewModelState.LOADING);
 
+    @Inject
+    IApiClient mApi;
+
     public MainViewModel(@android.support.annotation.NonNull Application application) {
         super(application);
+        App65.getAppComponent().inject(this);
         loadData();
     }
 
@@ -43,7 +50,7 @@ public class MainViewModel extends AndroidViewModel {
             mDataDisposable.dispose();
         }
         final Context context = getApplication().getApplicationContext();
-        mDataDisposable = ApiClient.fetchEmployers()
+        mDataDisposable = mApi.fetchEmployers()
                 .observeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
                 .subscribe(

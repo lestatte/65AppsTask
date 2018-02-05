@@ -1,4 +1,4 @@
-package ru.sample.elestatte.test65apps.components;
+package ru.sample.elestatte.test65apps.components.database;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
@@ -9,7 +9,7 @@ import java.util.List;
 import ru.sample.elestatte.test65apps.response.Speciality;
 
 /**
- * Dao for storing response from ApiClient - Speciality item
+ * Dao for storing response from ApiClientImpl - Speciality item
  *
  * @author Shramko Alexey
  *         Date: 23.12.17

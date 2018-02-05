@@ -1,4 +1,4 @@
-package ru.sample.elestatte.test65apps.components;
+package ru.sample.elestatte.test65apps.components.database;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
@@ -10,7 +10,7 @@ import ru.sample.elestatte.test65apps.response.Employer;
 import ru.sample.elestatte.test65apps.response.Speciality;
 
 /**
- * Dao for storing response from ApiClient - Speciality Employer Relation
+ * Dao for storing response from ApiClientImpl - Speciality Employer Relation
  *
  * @author Shramko Alexey
  *         Date: 23.12.17
