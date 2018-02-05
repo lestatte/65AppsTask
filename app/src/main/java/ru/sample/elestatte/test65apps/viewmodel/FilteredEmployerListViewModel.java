@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -15,8 +17,9 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.PublishSubject;
+import ru.sample.elestatte.test65apps.App65;
 import ru.sample.elestatte.test65apps.R;
-import ru.sample.elestatte.test65apps.components.database.EmployerDatabase;
+import ru.sample.elestatte.test65apps.components.IEmployerRepository;
 import ru.sample.elestatte.test65apps.response.Employer;
 import ru.sample.elestatte.test65apps.response.Speciality;
 
@@ -35,9 +38,13 @@ public class FilteredEmployerListViewModel extends AndroidViewModel {
     private PublishSubject<List<Employer>> mEmployersData = PublishSubject.create();
     private PublishSubject<Employer> mFullEmployerData = PublishSubject.create();
 
+    @Inject
+    IEmployerRepository mRepository;
+
     public FilteredEmployerListViewModel(
             @android.support.annotation.NonNull Application application) {
         super(application);
+        App65.getAppComponent().inject(this);
         loadData();
     }
 
@@ -49,7 +56,7 @@ public class FilteredEmployerListViewModel extends AndroidViewModel {
         mSpecialityDataDisposable =
                 Observable.fromCallable(new Callable<List<Speciality>>() {
                     @Override public List<Speciality> call() {
-                        return EmployerDatabase.getInstance(context).getSpecialityDao().getAll();
+                        return mRepository.getSpecialities();
                     }
                 }).observeOn(Schedulers.io())
                   .subscribeOn(Schedulers.io())
@@ -82,16 +89,13 @@ public class FilteredEmployerListViewModel extends AndroidViewModel {
         if (null != mEmployerDataDisposable) {
             mEmployerDataDisposable.dispose();
         }
-        final Context context = getApplication().getApplicationContext();
         mEmployerDataDisposable =
                 Observable.fromCallable(new Callable<List<Employer>>() {
                     @Override public List<Employer> call() {
                         if (-1 == id) {
-                            return EmployerDatabase.getInstance(context).
-                                    getEmployerDao().getAll();
+                            return mRepository.getEmployers();
                         } else {
-                            return EmployerDatabase.getInstance(context).
-                                    getEmployerSpecialityDao().getEmployerForSpeciality(id);
+                            return mRepository.getEmployerForSpeciality(id);
                         }
                     }
                 }).observeOn(Schedulers.io())
@@ -109,12 +113,10 @@ public class FilteredEmployerListViewModel extends AndroidViewModel {
         if (null != mFullEmployerDataDisposable) {
             mFullEmployerDataDisposable.dispose();
         }
-        final Context context = getApplication().getApplicationContext();
         mFullEmployerDataDisposable =
                 Observable.fromCallable(new Callable<Employer>() {
                     @Override public Employer call() {
-                        item.speciality = EmployerDatabase.getInstance(context)
-                                .getEmployerSpecialityDao().getSpecialityForEmployer(item.id);
+                        item.speciality = mRepository.getSpecialityForEmployer(item.id);
                         return item;
                     }
                 }).observeOn(Schedulers.io())

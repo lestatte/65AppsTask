@@ -14,7 +14,7 @@ import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
 import ru.sample.elestatte.test65apps.App65;
 import ru.sample.elestatte.test65apps.components.IApiClient;
-import ru.sample.elestatte.test65apps.components.database.EmployerDatabase;
+import ru.sample.elestatte.test65apps.components.IEmployerRepository;
 import ru.sample.elestatte.test65apps.response.EmployersList;
 import ru.sample.elestatte.test65apps.utility.PrefManager;
 import ru.sample.elestatte.test65apps.utility.Utils;
@@ -33,6 +33,9 @@ public class MainViewModel extends AndroidViewModel {
 
     @Inject
     IApiClient mApi;
+
+    @Inject
+    IEmployerRepository mRepository;
 
     public MainViewModel(@android.support.annotation.NonNull Application application) {
         super(application);
@@ -60,7 +63,7 @@ public class MainViewModel extends AndroidViewModel {
                                 String newCheckSum = Utils.getChecksum(r);
                                 if (!PrefManager.readChecksum(context).equals(newCheckSum)) {
                                     PrefManager.writeChecksum(context, newCheckSum);
-                                    EmployerDatabase.getInstance(context).putData(r.items);
+                                    mRepository.putData(r.items);
                                 }
                                 if (r.items.isEmpty()) {
                                     mCurrentState.onNext(ViewModelState.EMPTY);

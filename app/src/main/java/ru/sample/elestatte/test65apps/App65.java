@@ -21,7 +21,7 @@ public class App65 extends Application {
     }
 
     private AppComponent buildComponentGraph() {
-        return AppComponent.Initializer.init();
+        return AppComponent.Initializer.init(this);
     }
 
     public static AppComponent getAppComponent() {

@@ -29,7 +29,7 @@ public class EmployerSpecialityJoin {
     public final int idEmployer;
     public final int idSpeciality;
 
-    EmployerSpecialityJoin(final int idEmployer, final int idSpeciality) {
+    public EmployerSpecialityJoin(final int idEmployer, final int idSpeciality) {
         this.idEmployer = idEmployer;
         this.idSpeciality = idSpeciality;
     }

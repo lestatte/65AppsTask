@@ -3,6 +3,7 @@ package ru.sample.elestatte.test65apps.components;
 import android.support.annotation.NonNull;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 import ru.sample.elestatte.test65apps.components.network.ApiService;
@@ -14,6 +15,7 @@ import ru.sample.elestatte.test65apps.response.EmployersList;
  * @author Shramko Alexey
  *         Date: 23.12.17
  */
+@Singleton
 public class ApiClientImpl implements IApiClient {
 
     @NonNull

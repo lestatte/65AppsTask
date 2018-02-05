@@ -20,8 +20,8 @@ interface APIModule {
      * We can quickly rework this place. For example, we can replace
      * current implementation with fabric combined with strategy.
      *
-     * @param impl Current api implementation
-     * @return interface for interaction with Current api implementation
+     * @param impl current api implementation
+     * @return interface for interaction with current api implementation
      */
     @Binds
     @Singleton
